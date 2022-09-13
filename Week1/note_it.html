@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Loop</title>
+    <script>
+        function saveNote() {
+            var currentDateAndTime = new Date()
+            var descriptionInput = document.getElementById("description_input")
+            var noteEditor = document.getElementById("note_editor")
+            var aNoteDescription = descriptionInput.value
+            var aNoteText = noteEditor.value
+            var aCompleteNote = currentDateAndTime.toLocaleString() + "--" + aNoteDescription
+            aCompleteNote +=  "<p>" + aNoteText + "</p>";
+            var storedNotesString = localStorage.getItem("all_notes")
+            var allNotes = JSON.parse(storedNotesString)
+            if (allNotes == null) {
+                allNotes = []
+            }
+            allNotes.push(aCompleteNote)
+            var allNotesString = JSON.stringify(allNotes)
+            localStorage.setItem("all_notes", allNotesString)
+            showAllNotes()
+            descriptionInput.value = null
+            noteEditor.value = null
+        }
+
+        function showAllNotes() {
+            var storedNotesString = localStorage.getItem("all_notes")
+            var allNotes = JSON.parse(storedNotesString)
+            if (allNotes != null) {
+                var noteDisplayer = document.getElementById("all_notes_display")
+                noteDisplayer.innerHTML = null
+                var numberOfNotes = allNotes.length
+                for (var i = 0; i < numberOfNotes; i++) {
+                    var aNote = allNotes[i]
+                    noteDisplayer.innerHTML +=  "<hr><p>" + aNote + "</p>"
+                }
+            }
+        }
+
+    </script>
+
+    <style>
+        body {
+            background-color: lightgrey;
+        }
+        input {
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px #666666 inset;
+            height: 25px;
+            width: 200px;
+            text-indent: 5px;
+        }
+        input:focus {
+            outline: none;
+        }
+        #note_entry_area {
+            width : 500px;
+            padding: 5px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px #666666 inset;
+            text-indent: 5px;
+        }
+        textarea {
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px #666666 inset;
+            width: 90%;
+            height: 150px;
+            text-indent: 5px;
+            resize: none;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body onload="showAllNotes()">
+    <section id="note_entry_area">
+        <h1>Note It!</h1>
+        Description: <input type="text" id="description_input">
+        <textarea id="note_editor" placeholder="Note it down. Don't forget"></textarea>
+        <button onclick="saveNote()">Save</button>
+    </section>
+    <section id="all_notes_display"></section>
+</body>
+</html>
