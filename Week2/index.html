@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WDD 330 Portfolio</title>
+</head>
+<body>
+    <header>
+        <h1>Week 02 notes based on the book "Novice to Ninja 2nd Edition by Darren Jones"</h1>
+    </header>
+    <main>
+        <h2>Chapter 3: Arrays, Logic, and Loops</h2>
+        <p>Exercise: <a href="story_editor.html">Story Editor</a></p>
+        <h3>Question: </h3>
+        <ul>
+            <li>I do not understand this snippet of code: <br>
+               <code>array.sort((a, b) => return a-b);</code> I get the comparison but how this snippet works chronologically
+            </li>
+            <li>How can callback function referred when using asynchronous function? I wonder how this function waits behind the scene 
+                even though it works synchronously inside another function.
+            </li>
+
+        </ul>
+        <h3>Arrays / Set / Map:</h3>
+        <ul>
+            <h4>Array</h4>
+            <ul>
+                <li>Creating an array litteral const myArray = [] is better the new Array() constructor</li>
+                <li>Arrays can have multiple different data types.</li>
+                <li>You can delete an item of array by writing <code>delete myArray[index]</code>, but it changes the item into undefined value</li>
+                <li>Destructuring: <code>const [x,y] = [1,2];</code> Another flexilbe way to access the items and assign to new variables.</li>
+                <li>
+                <li><code>myArray.length // access the length of the array</code></li>
+                <li><code>myArray.pop() // remove the last item</code>, <code>myArray.shift() //remove the first item</code>,
+                <code>myArray.unshift(item) // add an item to the first index</code>, <code>myArray.push(item) //add the item to the last index</code></li>
+                <li>In order to merge Arrays, we can concatenate by using the concat() method, or use the spread operator <code>[...Array1, ...Array2]</code></li>
+                <li>the join() method stringify the array, seperated with a comma by default or can be specified inside the parentheses</li>
+                <li>slice(startIndex, endIndex) method: create a subarray starting from the startIndex, and ening to the endIndex </li>
+                <li>array.splice(index to remove/to add, amount to remove, item1 to add, ....., itemX to add)</li>
+                <li>array.reverse(): reverse the order of the array.</li>
+                <li>array.sort(): sort alphabetically the array.</li>
+                <li>array.indexOf(): return the index of an item within the parathenses</li>
+                <li>array.include(): return true if the array contains the item in the parameter</li>
+            </ul>
+            <h4>Sets</h4>
+            <ul>
+                <li>A set represents list of collection of unique values.</li>
+                <li><code>new Set()</code> to create a set</li>
+                <li>
+                    <pre>
+                        <code>
+                            const set = new Set(); 
+                            set.add(2); //add 2 in the set
+                            set.size(); //access the length of the set
+                            set.has('item'); //return true if the item is included in the set
+                            set.delete('item'); //remove the item 
+                            set.clear(); //remove all the items
+                            const array = [...set] //converting the set into an array
+                            const array = Array.from(set); //another method to convert the set into array
+                            const weak = new WeakSet(); //a set that cannot have primitive data types, cannot be iterable, deal with the memory issue
+                        </code>
+                    </pre>
+                </li>
+            </ul>
+            <h4>Map</h4>
+            <ul>
+                <li>Combination of key/value pair list, different than object</li>
+                <li>
+                    <pre>
+                        <code>
+                            //similar to the methods of Set
+                            const romanNumerals = new Map(); //declare and assign a new map
+                            romanNumerals.set(2,'II').set(3,'III').set(4,'IV').set(5,'V');  // add the value key pair in the map using the set() method
+                            romanNumerals.get(4); //retrieve the value of a key 
+                            romanNumerals.has(5); true //test the existence of the key
+                            const heroes = new Map([ ['Clark Kent','Superman'],
+                            ['Bruce Wayne', 'Batman']
+                            ]); // we can create the value key pair like coded
+                            heroes.size(); //access the length
+                            heroes.delete('Clark Kent'); //delete a set
+                            heroes.clear(); // clear all of the sets
+                            [...romanNumerals] //converting to array
+                            const weak = new WeakMap(); //similar to the new WeakSet()
+                        </code>
+                    </pre>
+                </li>
+            </ul>
+        </ul>
+        <h3>Logic</h3>
+        <pre>
+            <code>
+                if (condition) {
+                    // code to run if condition is true
+                    } else {
+                        //code to run if condition is false
+                    }
+                
+                /*
+                Ternary operator: 
+                condition ? (code to run if condition is true) : (code to run if false)
+
+                Switch case: it allows to test multiple conditions. It's best practice to use break and default when the cases are false.
+            
+                Loop :
+                while (condition){
+                    //when condition met, run the codes inside the blocks
+                }
+
+                do {
+                    do something
+                } while(condition)
+        
+                for (initialization ; condition ; after) { do something }
+        
+                Looping over arrays : 
+                ie : for(let i=0, max=avengers.length; i < max; i++){
+                    console.log(avengers[i]);
+                }
+        
+                for-of loop : a better way to iterate the item in an array, set, and map.
+        
+                */
+        </pre>
+
+        <h3>Functions</h3>
+        <ul>
+            <li>a function declaration: <code>function hello(){//codes}</code></li>
+            <li>a function expression: <code>const hello = function(){//codes}</code></li>
+            <li>arrow function: <code> const hello => () {//codes}</code></li>
+            <li>Remember to use the DRY principles to make the code maintainable and performant</li>
+            <li>Function hoisting means that it can be written after or before its invokation.</li>
+            <li>
+                <pre>
+                    <code>
+                        function (name = john){
+                            return name
+                        } //name = john, a default value for john
+
+                        function arguments(){
+                            return arguments;
+                        } // access the arguments of the function
+                    
+                        function rest(...args){
+                            for(arg of args){
+                            console.log(arg);
+                            }
+                        } // ...args, it is used to access multiple arguments
+                    </code>
+                </pre>
+            </li>
+            <li>
+                <pre>
+                    <code>
+                        //callback function is a function as a parameter to another function.
+                        //Array iterator
+                        // .forEach(value, index, array) it takes a callback function, and iterate every item
+                        // .map(value, index, array) similar to forEach(), create a new array based on the codes of the callback function
+                        // .reduce(acc, value), return a single value, usually used for statistics
+                        //. filter(), create a new array for filtering the array
+
+                    </code>
+                </pre>
+            </li>
+        </ul>
+    </main>
+</body>
+</html>
