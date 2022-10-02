@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 3 Notes</title>
+</head>
+<body>
+    <header>
+        <h1>Week 03 Notes from "Novice to Ninja"</h1>
+    </header>
+    <main>
+        <h2>Exercise:</h2>
+        <p><a href="exericize/index.html">Quizz to Ninja</a></p>
+        <h2>Chapter 5: Object</h2>
+        <h3>Object Literals</h3>
+        <p> We create an object literal by entering a pair of curly braces.
+            <code>const spiderman = {};</code>. ES6 provided a shorthand of
+            creating object if a property key is the same as a variable name: 
+            <code>const ironMan = { name, realName };</code>
+        </p>
+        <p>We can access the property by using the dot notation (<code>superman.name</code>
+        or with bracket notation <code>supername['name'].</code></p>
+        <p><strong>Computed Properties</strong> allows an object to have key as a code
+        inside square brackets</p>
+        <p>We call a method by using the dot notation and add parentheses after 
+            the method name.
+        </p>
+        <p>Check the existence of a property or method: 
+            <pre>
+                <code>
+                    'city' in superman; //using the in operator
+                    superman.city !== undefined; //checking if it is undefined
+                    superman.hasOwnProperty('city'); //use the hasOwnProperty method
+                </code>
+            </pre>
+        </p>
+        <p>Use for in loop for iterating through all of an object's properties: it allows to
+            find all of the values of the key of the object, however, there may be inherited properties, so,
+            it's better to use Object.keys(object) <code>for (const key of Object.keys(superman))</code>
+        </p>
+        <p>Object.entries() also used to access the key-value pair</p>
+        <p>Adding properties: <code>superman.city = 'Metropolis';//add by assigning value </code><br>
+        We can change any properties of an object also by assigning to another <br>
+       Delete a property: <code>delete superman.fly</code></p>
+       <p>We can have nested objects in your liking, and we can use object as parameters to functions, <br>
+    <br> the concept "this" refers to the object properties and method within while used in that same object.</p>
+    <h3>Built-in Objects:</h3>
+    <p>JSON: 
+    <pre>
+        <code>
+            JSON.parse(batman); //change the JSON format to object
+            JSON.stringify(wonderWoman); //change an object to JSON format
+        </code>
+    </pre>
+    Math:
+        <pre>
+            <code>
+                Math.PI // an example of Math property
+                Math.abs(-4.6) // an example of Math Method
+            </code>
+        </pre>
+    Date:
+    <pre>
+        <code>
+            const today = new Date(); //constructor function to create a new date object
+            today.toString(); //output the date of today
+        </code>
+    </pre>
+    Remember that we can use getter and setter methods for the Date object.
+    <br>The RegExp Object:
+    <pre>
+        <code>
+            const pattern = /[a-zA-Z]+ing$/; //creating a pattern
+            pattern.test('joke'); // to test if it matches to the pattern
+            pattern.exec('joke'); // similar to the test property
+        </code>
+    </pre>
+    String Methods:
+    <pre>
+        <code>
+            'Hello World!'.split(/\s+/) // splits the whitespaces with a comma.
+            'JavaScript'.match(/[aeiou]/); // returns an array of all the matches 
+            "I'm learning JavaScript".search(/java/i) // returns the position of the first match
+            'JavaScript'.replace(/[aeiou]/ig, '*') // replaces any matches with another string.
+        </code>
+    </pre>
+    </p>
+    <h2>Chapter 6: The Document Object Model</h2>
+    <p>The DOM provides several methods to access all of the HTML nodes, for example:
+        <pre>
+            <code>
+                const body = document.body; // get the body
+                body.nodeType; // to see the type of the node
+                body.nodeName; // to see the name of the element
+                const imageArray = Array.from(document.images); // to turn nodeList to array
+                const h1 = document.getElementById('title'); // get the element by its id
+                const listItems = document.getElementsByTagName('li') // get element by their tag name
+                document.querySelector('#bats') //we get the element by using selector like in css
+                const wonderWoman = document.querySelector('ul#roster li:last-child');
+                wonderWoman.parentNode; // access the parent
+                wonderWoman.nextSibling // access the next sibling
+            </code>
+        </pre>
+    </p>
+    <p>Finding the value of a node:
+        <pre>
+            <code>
+                const textNode = wonderWoman.firstChild;
+                textNode.nodeValue;
+                wonderWoman.textContent; //find the value of wonderWoman
+                wonderWoman.getAttribute('class'); // returns the value of the attribute
+                wonderWoman.setAttribute('class', 'villain'); // set the class attribute to villain
+            </code>
+        </pre>
+    </p>
+    <p>The className Property:
+        <pre>
+            <code>
+                wonderWoman.className; //assign the class attribute directly
+                wonderWoman.classList.add('warrior'); // add a class to a specific element
+                wonderWoman.classList.toggle('hero'); // will remove the hero class if it exists in the element
+                wonderWoman.classList.toggle('sport'); // will add the 'hero' class back
+            </code>
+        </pre>
+    </p>
+    <p>Creating an element:
+        <pre>
+            <code>
+                const flash = document.createElement('li');
+                const flashText = document.createTextNode('Flash'); //create the text node
+                flash.appendChild(flashText);
+            </code>
+        </pre>
+        This can be made simpler in this following code:
+        <pre>
+            <code>
+                const flash = document.createElement('li');
+                flash.textContent = 'Flash';
+            </code>
+        </pre>
+    </p>
+    <p> The insertBefore() method appends an element before a specific element</p>
+    <p>Updating CSS: it should have a style property following by Camel Case CSS Properties
+        example: <code>superman.style.backgroundColor = 'blue';</code>
+    </p>
+    <h2>Chapter 7: Events</h2>
+    <p>It adds interactions between the web page and the users.</p>
+    <p>
+        <pre>
+            <code>
+                document.body.addEventListener("click", doSomething); // when clicked, the doSomething function runs 
+                function doSomething(event){
+                    console.log(event.target); //event.target refers to the node that fired the event.
+                }
+            </code>
+        </pre>
+    </p>
+    Types of Events:
+    <ul>
+        <li>click: when a mouse button is clicked.</li>
+        <li>mousedown: when a mouse button is down.</li>
+        <li>mouseup: when a mouse button is up.</li>
+        <li>dblclick: when doubleclicked.</li>
+        <li>mouseover: when hovered</li>
+        <li>mouseout: after hovered, and back again when it moves away</li>
+        <li>keydown: when a key is pressed.</li>
+        <li>keyup: when the button is released.</li>
+        <li>event.key: the key pressed at that moment.</li>
+        <li><code>removeEventListener() // remove an event</code></li>
+    </ul>
+    <p>event.preventDefault() is a method of the event object to stop the default behavior happening
+        such as link and submit button.
+    </p>
+    <h2>Chapter 8: Forms</h2>
+    <p>Forms are ways enable the user to input their datas, their queries.</p>
+    <pre>
+        <code>
+            const form = document.forms[0] // accessing the form
+            form.reset() //a method that will reset all the form controls back to their initial values.
+            form.action ='/an/other.url' // redirect to a different url
+            document.forms.hero.heroName.focus() // focus the element
+        </code>
+    </pre>
+    <h2>Chapter 9: The Window Object</h2>
+    <p>The BOM is a collection of properties and methods that contain
+        information about the browser and computer screen.
+    </p>
+    <p>Global variable: created without const, let and var</p>
+    <p>alert('Hello'): display a message in a dialog box.</p>
+    <pre>
+        <code>
+            window.navigator.userAgent; //retrieve the brower and os of the user
+            window.location.href; // url of the current page
+            window.location.protocol; //the protocol of the page
+            window.location.assign('https://www.sitepoint.com/'); // can be used to load another resource from a URL provided as a parameter
+            window.history.go(1); //goes forward 1 page
+            window.history.go(0); //reloads the current page
+            window.history.go(-1); //goes back 1 
+            document.cookie='name=Superman'; // create cookies
+            document.cookie = `name=Batman; expires=${expiryDate.toUTCString()}`;
+                
+        </code>
+    </pre>
+    </main>
+    
+</body>
+</html>
