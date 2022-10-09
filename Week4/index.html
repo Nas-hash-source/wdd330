@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 4 Notes</title>
+</head>
+<body>
+    <header>
+        <h1>Week 04 Notes from "Novice to Ninja"</h1>
+    </header>
+    <main>
+        <h2>Exercise:</h2>
+        <p><a href="exercise/index.html">Quizz to Ninja</a></p>
+        <h2>Chapter 7: Events</h2>
+        <p>It adds interactions between the web page and the users.</p>
+        <p>
+            <pre>
+                <code>
+                    document.body.addEventListener("click", doSomething); // when clicked, the doSomething function runs 
+                    function doSomething(event){
+                        console.log(event.target); //event.target refers to the node that fired the event.
+                    }
+                </code>
+            </pre>
+        </p>
+        Types of Events:
+        <ul>
+            <li>click: when a mouse button is clicked.</li>
+            <li>mousedown: when a mouse button is down.</li>
+            <li>mouseup: when a mouse button is up.</li>
+            <li>dblclick: when doubleclicked.</li>
+            <li>mouseover: when hovered</li>
+            <li>mouseout: after hovered, and back again when it moves away</li>
+            <li>keydown: when a key is pressed.</li>
+            <li>keyup: when the button is released.</li>
+            <li>event.key: the key pressed at that moment.</li>
+            <li><code>removeEventListener() // remove an event</code></li>
+        </ul>
+        <p>event.preventDefault() is a method of the event object to stop the default behavior happening
+            such as link and submit button.
+        </p>
+
+        <h2>Chapter 8: Forms</h2>
+    
+        <h3>Forms</h3>
+        <p>It's possible, and becoming more and more common, to process
+            the information in a form on the front end before it is sent to the server.
+        </p>
+        <h3>Accessing Form elements</h3>
+        <p>We access all of the forms in a HTML file using <code>
+            document.forms</code>, so a specific form can be returned
+        either through the index method, or using the name attribute
+         <code>document.forms.name</code>. Be wary if you use accidently
+        the name of the form as any property or methods of the document.forms
+        object, use the bracket notation can be used to avoid this</p>
+        <p><code>form.elements</code> returns all elements contained in the form.</p>
+        <p><code>form.name</code>It can access a specific of the form controls using the
+        name attribute</p>
+
+        <h3>Form Properties and Methods</h3>
+        <pre>
+            <code>
+                form.submit() // submit the form automatically
+                /* the element can be submitted manually by the user employing a button or 
+                input element with a type attribute of submit, or even an input element with a type attribute of image */
+                form.reset() // reset all the form controls back to their initial values
+                form.action ='/an/other.url' // to send to a different URL to be processed on the server
+            </code>
+        </pre>
+        <h3>Form Events</h3>
+        <ul>
+            <li>the focus event is enabled when the cursor is placed inside the element.</li>
+            <li>the blur event: when the user moves the focus away from the form element.</li>
+            <li>the change event: when the user moves the focus awau after changing it.</li>
+            <li>the submit event: when the user submits a form.</li>
+        </ul>
+        <h3>Submitting a Form</h3>
+        <p>We can use JavaScript to intercept the form before sending to the server.
+            Using the event.preventDefault() hold the default action of the submit button
+        </p>
+        <pre>
+            <code>
+                input.value //the value of the input, and can be assigned to another value
+            </code>
+        </pre>
+        <h3>Form Controls</h3>
+        <p>The defautl type of an input field is text, the type="text" makes it explicit. <br>
+        The type="password": hidden to be read on screen. <br>
+        Checkbox: true if checked, false if unchecked. <br>
+        Radio type: only one can be checked <br>
+        Hidden Input type: just hidden, not secret <br>
+        File Input fields: to upload files <br>
+        <p>The select Drop-Down List: 
+            form.city.selectedIndex : returns the index of the option selected. <br>
+            form.city.options[0].text : access the text of the options in the drop-down list using the index.
+        </p>
+        <h3>Form Validation</h3>
+        <p>The form validation should be applied both on the client-side and server-side of the program
+            to make it more sanitized. 
+        </p>
+
+        <h2>Chapter 9: The Window Object</h2>
+        <h3>BOM</h3>
+        <p>It contains information about the browser and computer screen</p>
+        <h3>Going Global</h3>
+        <p>Global variables can be created without using var, elt or const.</p>
+        <p>parseInt(), isNaN() and some functions are all window object.</p>
+
+        <h3>Dialogs</h3>
+        <p>alert(), confirm() and prompt() are not part of ECMScript standard.</p>
+        <pre>
+            <code>
+                window.alert('Hello'); //pause the execution and display a message in a display box
+                window.confirm(); // stop the execution, if ok: return true, if cancel: return false
+                window.prompt(); // allows the use to enter text, return as a string
+            </code>
+        </pre>
+        <h3>Browser information:</h3>
+        <pre>
+            <code>
+                window.navigator.userAgent; // return the browser and os information
+                //it can be modified though, and becoming deprecated
+                window.location; // the URL location of the page
+                window.location.href; // the href
+                window.location.protocol;
+                window.location.hostname;
+                window.location.port;
+                window.location.pathname;
+                window.location.search // returns a string that starts with a ? followed by the query string parameter
+            </code>
+        </pre>
+        <h3>Browser History:</h3>
+        <pre>
+            <code>
+                window.history.go(1); // goes forward 1 page or we can use window.history.forward()
+                window.history.go(0); // reloads the current page
+                window.history.go(-1); // goes back 1 page or we can use window.history.back()
+            </code>
+        </pre>
+
+        <h3>Controlling Window</h3>
+        <pre>
+            <code>
+                const popup = window.open('https://sitepoint.com',
+                'SitePoint', 'width=400, height=400, resizable=yes');
+                //first parameter: URL, second parameter: name of the window, third parameter: attributes
+                popup.close(); // close the window
+                window.moveTo(x, y) // move the position of the window
+                window.resizeTo(width, height); // resize the window 
+            </code>
+        </pre>
+        <p>Can be used to popup ad and annoying stuff but there are alternative ways to avoid that.</p>
+        
+        <h3>Screen Information:</h3>
+        <pre>
+            <code>
+                window.screen.height; // the height of the screen in px
+                window.screen.width; // he width of the screeen in px
+                window.screen.availWidth; // width screen excluding any OS menus
+                window.screen.availHeight; // heigh screen excluding any OS menus
+                window.screen.colorDepth; // access the color bit depth
+            </code>
+        </pre>
+
+        <h3>The Document Object</h3>
+        <pre>
+            <code>
+                document.write(); //writes a string of text to the page.
+                //it will completely replace the current document:
+            </code>
+        </pre>
+
+        <h3>Cookies</h3>
+        <p>Text file that contains a list of name/value pairs seperated by semicolons</p>
+        <p>The EU directive recommended to ask for permission before setting cookies</p>
+        <pre>
+            <code>
+                document.cookie = 'name=Superman'; // add cookie without overwriting
+
+            </code>
+        </pre>
+        <p>By default, cookies are deleted when the session is finished, but you can add expiry dates</p>
+        <pre>
+            <code>
+                const expiryDate = new Date();
+                const tomorrow = expiryDate.getTime() + 1000 * 60 * 60 * 24;
+                expiryDate.setTime(tomorrow);
+                document.cookie = `name=Batman; expires=${
+                expiryDate.toUTCString()}`; // add an expiry date
+            </code>
+        </pre>
+        <p>By default, it's only read inside the same directory and domain as the file was set.</p>
+        <pre>
+            <code>
+                document.cookie = 'name=Batman; path=/'; //any page in the root directory can read the cookie;
+                document.cookie = 'name=Batman; domain=sitepoint.com'; // will allow subdomains too to read the cookie;
+            </code>
+        </pre>
+
+        <h3>Secure cookies</h3>
+        <code>document.cookie = 'name=Batman; secure' // it's only transmitted over a secure HTTPS network</code>
+        <p>Deleting a cookie can be done by setting an expiration in the past.</p>
+        <p>Many developers use Cookies.js or jsCookie for dealing with cookies due to the JavaScript's cookie basic handling.</p>
+
+
+        <h3>Timing Functions</h3>
+        <p><code>window.setTimeout()</code> has a callback function as a first parameter and
+        a number of milliseconds as its second parameter.</p>
+        <p><code>window.clearTimeout()</code> prevents it to happen.</p>
+        <pre>
+            <code>
+                window.setInterval() //same as the window.setTimeout() but it repeats the action depending on the second parameter
+                window.clearInterval(summon) // clear the interval
+            </code>
+        </pre>
+
+        <h2>Chapter 12: Object-Oriented Programming in JavaScript</h2>
+        <h3>Encapsulation</h3>
+        <p>This principle is applied when you keep the logic hidden by the outside world</p>
+
+        <h3>Polymorphism</h3>
+        <p>Various object has the same method but different functionalities</p>
+
+        <h3>Inheritance</h3>
+        <p>Taking the features of one object to a new object. It inherits the properties or the methods.</p>
+
+        <h3>Constructor Functions</h3>
+        <pre>
+            <code>
+                const Dice = function(sides=6){
+                    this.sides = sides;
+                    this.roll = function() {
+                    return Math.floor(this.sides * Math.random() + 1)
+                    }
+                    } // constructor function, the keyword this represent object within
+            </code>
+        </pre>
+        <p>The class declaration syntax was introduced in ES6, it has a function named 
+            constructor () {}
+        </p>
+        <p>Static Methods: it is called by the class directly rather than by instances of the class.</p>
+        <p>Prototypal Inheritance: property and methods of the class's prototype can be accessed
+            by every object in that class.
+        </p>
+
+        <h2>Chapter 15: Modern JavaScript Development</h2>
+        <p>Organization is needed when it comes to bigger project when there will be thousands of codes.</p>
+        <h3>Libraries</h3>
+        <p>They can be used to complete common tasks without repetitive code</p>
+        <p>jQuery is the most popular of all the JavaScript libraries. Its best advantage is that it supports the older browsers. </p>
+        <p>Underscore and Lodash: very similar libraries. Using one of them in your project
+            can give access to a large number of well-tested utility functions that may be required in projects.
+        </p>
+        <p>Advantage: used by lots of people and help you avoid reinvent the wheel.</p>
+        <p>Disadvantage: performance issue, but sometimes small and optimized.</p>
+
+        <h3>Modular JavaScript</h3>
+        <p>It is way of organizing codes with modules to make the project more maintainable.</p>
+        <pre>
+            <code>
+                export const PI = 3.1415926; // export the variable
+                import { PI } from './pi.js'; // import the variable to be used
+                export {variance, mean} // export functions from a module
+                import { mean, variance } from './stats.js'; // import selectively the functions
+                import * as stats from './stats.js'; // import all from a module
+                export default square; // export a single function or variable, usually used for modules and functions
+                import square from './square.js'; // import a default export
+                import sq from './square.js'; // use an alias from the default export
+            </code>
+        </pre>
+
+        <h3>Node.js Modules</h3>
+        <pre>
+            <code>
+                module.exports = x => x * x; // export in node js
+                const square = require('./squareFunction'); // then import it
+            </code>
+        </pre>
+    </main>
+    
+</body>
+</html>
