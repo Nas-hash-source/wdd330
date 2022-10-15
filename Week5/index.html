@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 5 Notes</title>
+</head>
+<body>
+    <h1>Week 5 Notes</h1>
+    <p>Exercise: <a href="exercise/index.html">Quizz Ninja</a></p>
+    <h2>Chapter 10: Testing and Debugging</h2>
+    <h3>Errors, Exceptions, and Warnings</h3>
+    <ul>
+        <li>Exceptions: error that references what should be fixed.</li>
+        <li>Stack Traces: bunch of intertwined functions that leads to the origin that produces the error</li>
+        <li>Warnings: the program still runs but may cause problems later.</li>
+    </ul>
+
+    <h3>Importance of testing and debugging</h3>
+    <p>Strict Mode: (<code>'use strict';</code>) allows to abide in the best practice for avoiding sloppy codes.</p>
+    <p>Often in a team, you cannot always assume that they will follow strict mode, so putting the 'use strict' in a self-invoked function is 
+        recommended.
+    </p>
+
+    <h3>Linting Tools:</h3>
+    <p>JS Lint, JS Hint, and ES Lint improve a programming style guide, it can be useful in a team for a mutual convention.</p>
+    
+    <h3>Feature Detection:</h3>
+    <p>Since Browsers are continually evolving, but some stays older. We need to check if a particular browser has a feature or not
+        by using if block. Some library such as Modernizr facilitate this detection.
+    </p>
+
+    <h3>Debugging in the Browser:</h3>
+    <p>alert() was widely used to track breakpoints, variables in the past, now the console offers diverse variety to debug your codes.</p>
+    <p>Debugging tools: the debugger keyword can be used to set breakpoints. Remember to remove them before shipping.</p>
+
+    <h3>Error Objects:</h3>
+    <ul>
+        <li><code>const error = new Error()</code> //Error object can be customized when there are Exceptions</li>
+        <li>EvalError: Error related to the global eval() function</li>
+        <li>RangeError: out of range error</li>
+        <li>ReferenceError: an item or a function does not exist</li>
+        <li>SyntaxError: error in the syntax</li>
+        <li>TypeError: error in the type of the value </li>
+        <li>URIError: problem related to encoding and decoding the URL</li>
+        <li>InternalError: error from  the JavaScript engine such as too much recursion</li>
+    </ul>
+
+    <h3>Throwing Exceptions</h3>
+    <p>The throw statements allows us to create our own exception. It's better practice however to throw an error object. </p>
+    
+    <h3>Exception Handling</h3>
+    <p>If we suspect that a piece of code will result in an exception, try to handle it with try, catch and finally</p>
+
+    <h3>Test-driven Development</h3>
+    <p>Writing tests before any actual code.</p>
+    <p>Jest: TDD framework, 
+        <pre>
+            <code>
+                test('square root of 4 is 2', () => {
+                    expect(squareRoot(4)).toBe(2);
+                    });
+                //first parameter: description of the test
+                //second parameter: anonymous function with the expect()
+                //inside the expect, function called matchers (toBe()), toEqual(array)
+            </code>
+        </pre>
+        Then run this test, navigate the folder and enter <code>jest -c {}</code>
+        it will run all finles with test.js at the end.
+    </p>
+</body>
+</html>
