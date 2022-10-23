@@ -1,0 +1,111 @@
+/* Global style*/
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+main {
+  max-width: 400px;
+  margin: 15px auto;
+  overflow: auto;
+}
+
+h1 {
+  text-align: center;
+}
+
+/* todo list style */
+
+#todo-list {
+  padding: 0;
+  overflow-y: auto;
+  margin: 0;
+}
+
+#todo-list > li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px black solid;
+  border-bottom: none;
+  list-style: none;
+}
+
+#todo-list > li form {
+  display: flex;
+  align-items: center;
+}
+
+#todo-list > li button {
+  color: rgb(204, 14, 14);
+  background-color: transparent;
+  border: none;
+  font-size: 2em;
+  cursor: pointer;
+}
+
+
+/*todo option style*/
+
+#todo-option li button {
+  cursor: pointer;
+  background-color: transparent;
+  color: black;border: 1px black solid; 
+  font-size: 1em;
+  padding: 7px;
+  border: none;
+}
+
+/* aria-pressed = true */
+
+#todo-option li button[aria-pressed = true] {
+  border: 1px black solid;
+}
+
+#todo-option { 
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 5px;
+  width: 100%;
+  border: 1px black solid; 
+}
+
+/* checkbox style */
+input[type="checkbox"] {
+  width: 30px;
+  height: 30px;
+}
+
+input[type="checkbox"]:checked + label{
+  text-decoration: line-through;
+}
+
+/* add form style */
+#add-form {
+  display: flex;
+  position: fixed;
+  bottom: 15px;
+  width: 100%;
+  max-width: 400px;
+}
+
+#add-form button {
+  font-size: 2em;
+  cursor: pointer;
+  color: #2b4b27;
+  font-weight: bolder;
+  width: 10%;
+}
+
+#add-form input {
+  font-weight: normal;
+  font-size: 1.2em;
+  padding: 7px;
+  width: 90%;
+}
