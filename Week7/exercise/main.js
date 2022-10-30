@@ -3,7 +3,7 @@ fetch(url)
     .then(res => res.json())
     .then(quiz => {
         view.start.addEventListener('click', () =>
-            game.start(quiz.questions), false);
+            game.start(quiz), false);
         view.response.addEventListener('click', (event) =>
             game.check(event), false);
 });
