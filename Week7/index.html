@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 7 Notes</title>
+</head>
+<body>
+    <header>
+        <h1>Week 7 Notes</h1>
+    </header>
+    <main>
+        <h2>Question and Exercises</h2>
+        <ul style="color:red">
+            <li>Will the cache property in a function stored locally? Or just only for a session?</li>
+        </ul>
+        <p>Exercise: <a href="exercise/index.html">Quizz Ninja</a></p>
+
+        <h2>Chapter 11: Further functions</h2>
+
+        <h3>Function properties and methods:</h3>
+        <p>Function can have methods and properties: 
+            like Length property of a function return the number of its parameters.
+        We can have custom properties, too.</p>
+
+        <h3>Call and Apply method</h3>
+        <pre>
+            <code>
+                function sayHello(){
+                    return `Hello, my name is ${ this.name }`;
+                }
+                sayHello.call({name: "John"}); // call() can set the value of this in the function
+                // the object as an argument should have the property, though
+            </code>
+        </pre>
+        <p>The first argument of the call should be always the object, so if a parameter is added to the function,
+            beware that the first argument always stays an object which refers to 'this' within it.
+        </p>
+        <p>The apply() works the same way, but the second argument should be an array of the parameters of the 
+            function.
+        </p>
+
+        <h3>Memoization</h3>
+        <p>Using the cache property on a function, we can get and set our saved cache quickly.
+            It helps to give the result quickly if the argument was already computed before.
+        </p>
+        <h3>Immediate Invoked Function Expressions</h3>
+        <pre>
+            <code>
+                (function(){
+                    const temp = 'World';
+                    console.log(`Hello ${temp}`);
+                })(); // a function that calls itself.
+            </code>
+        </pre>
+        <p>IIFE is useful to declare temporary variables and for initialization code.</p>
+        <p><code>'use strict'</code> enabled to use clean code. IIFE is recommended for your own code, instead of 
+        stated globally, because others may not follow strict mode.</p>
+        <h3>Function that rewrites themselves</h3>
+        <p>It means that the function returns another function. It is useful for writing an initialization code,
+            then change into another logic with the flow. An example of the implementation of this method is to check the browser if it supports 
+            our features, and write the function accordingly.
+        </p>
+
+        <h3>Recursive functions</h3>
+        <p>A function that calls itself within its block until a condition is met.</p>
+        <pre>
+            <code>
+                function factorial(n) {
+                    if (n === 0) {
+                        return 1;
+                    } else {
+                        return n * factorial(n - 1); //here factorial function calls itself
+                    } // until n===0, it will iterate through itself and return one at a time until
+                    // the desired result.
+                }                    
+            </code>
+        </pre>
+
+        <h3>Callbacks</h3>
+        <pre>
+            <code>
+                function wait(message, callback, seconds){
+                    setTimeout(callback,seconds * 1000); //callback- a function that takes role as a parameter
+                    // with setTimeout(), it will work asynchronously
+                    console.log(message);
+                }                    
+            </code>
+        </pre>
+        <p>Callbacks can cause the well-known callback hell, so alternatively, we need several methods to avoid this:
+            <ul>
+                <li>Promises: it's an object that have a callback with two parameters which are resolve and reject,
+                    <pre>
+                        <code>
+                            const promise = new Promise( (resolve, reject) => {
+                                // initialization code goes here
+                                if (success) {
+                                    resolve(value); // when the operation is successful
+                                } else {
+                                    reject(error); // when the operation is not successful
+                                }
+                            });
+                            promise.then( //first argument, operation when resolved
+                                result => console.log(result), 
+                                          //second argument, operation when rejected
+                                result => console.log(result) );
+                            
+                            promise.catch(// same as before, operation when rejected);
+                        </code>
+                    </pre>
+                </li>
+                <li>Async function: added in ES2017, a better way to write promise based function
+                    <pre>
+                        <code>
+                            async function loadGame(userName) {
+                                try {
+                                    const user = await login(userName); // return a promise with the
+                                    //keyword await make the function as a promise, just make sure to add
+                                    //the async keyword on a function that has the await one.
+                                    const info = await getPlayerInfo (user.id);
+                                    // load the game using the returned info
+                                }
+                                catch (error){
+                                    throw error;
+                                }
+                            }                                
+                        </code>
+                    </pre>
+
+                </li>
+            </ul>
+        </p>
+
+        <h3>Generalized functions</h3>
+        <p>Callback can be used just as synchronous but make the function more flexible.
+            I mean the callback can be changed to any functions. 
+        </p>
+
+        <h3>Closure</h3>
+        <h4>Function scope:</h4>
+        <p>The goal of the closure is to retrieve a variable inside a function to the scope of another
+            , so that we can get, and set the variable outside of the local scope.
+        </p>
+        <pre>
+            <code>
+                function outer() {
+                    const outside = 'Outside!';
+                    function inner() {
+                        let inside = 'Inside!';
+                        console.log(outside);
+                        console.log(inside);
+                    }
+                    return inner; // return in the outer but access the inner function's variable
+                }
+                const closure = outer(); // return inner                    
+            </code>
+        </pre>
+        In the code above, the outer() functions access all of the variables in the inner() function
+        
+        <h3>Generators:</h3>
+        <p>The key point is that it saves the value returned from the function,
+            and continues the iteration inside it when its method next() is called.
+        </p>
+        <pre>
+            <code>
+                function* fibonacci(a,b) { // asterisk after the declaration
+                    let [ prev,current ] = [ a,b ]; 
+                    while(true) {
+                        [prev, current] = [current, prev + current];
+                        yield current; //instead of return, use yield to save it in the next call
+                    }
+                }  
+                const sequence = fibonacci(1, 1); //return the first value
+                sequence.next();// continue the iterator, with the previous saved value
+            </code>
+        </pre>
+
+        <h3>Functional Programming</h3>
+        <p>It's a paradigm to write program based on pure functions. The function composition makes it possible.</p>
+        <p>Pure functions: <br>
+            - should only depend on their arguments. <br>
+            - do not change external variables.
+            - same arguments return the same results.
+        </p>
+        <pre>
+            <code>
+                const number = 42;
+                function pureAdd(x,y) { // arguments provided
+                    return x + y; // does not access variable but the arguments
+                }
+                result = pureAdd(number,10); // the operation does not transform any of the variables outside of the scope.
+            </code>
+        </pre>
+
+        <h3>High-Order Functions</h3>
+        <p>Accept another functin as an argument, and returns a function.</p>
+        <pre>
+            Method useful to store variable in a function, and process it later.
+            <code>
+                function multiplier(x){// we can call it first to get x
+                    return function(y){ // and use it later to compute with y
+                        return x*y;
+                    }
+                }
+            </code>
+        </pre>
+
+        <h3>Currying</h3>
+        <p>
+            Process to accomplish a complete function, or return partially if the argument is not complete.
+        </p>
+        <pre>
+            <code>
+                //example
+                function multiplier(x,y) {
+                    if (y === undefined) { // if y not provided, compute it later
+                        return function(z) {
+                            return x * z;
+                    }
+                    } else {
+                        return x * y; // here computes the result
+                    }
+                }
+            </code>
+        </pre>
+
+
+        <h2>Chapter 13: Ajax</h2>
+        <p>It allows to update a portion of web pages without reloading.</p>
+        <p>APIs: collection of methods that allows external access to another program or service.</p>
+        <h3>Clients and servers</h3>
+        <p>JavaScript works generally in the browser, but now it can request ressources
+            from a server, usually JSON, text or HTML.
+        </p>
+
+
+        <h3>FETCH API</h3>
+        <p>The fetch() method has the URL as mandatory argument. 
+            <pre>
+                <code>
+                    fetch('https://example.com/data') //returns a promise
+                    .then( // code that handles the response )
+                    .catch( // code that runs if the server returns an error )
+                </code>
+            </pre>
+        
+        the response of the fetch yields an object with properties and methods: <br>
+        - ok property to see if the response is successful with the status range (200-299)<br>
+        Note that 404 and other errors are considered successful with a promise, so we need to check manually the resolved value <br>
+        After the check, we can throw an Error from the statusText property, which will held the status message such as forbidden, not found <br>
+        - status property, from the HTTP status code <br>
+        - headers property, for the headers information of the response <br>
+        - url : a string containing the URL of response <br>
+        - redirected: a boolean value if the response is from redirecting <br>
+        - type: strings value of "basic"(from the same domain), "cors"(from a valid cross-origin request), "error"(network error), "opaque" (from no-cors, data restricted) 
+        </p>
+        <pre>Text Responses
+            <code>
+                //text responses using the text() method
+                fetch(url)
+                    .then( response => response.text() //new promise ); // transforms the text stream into a JavaScript string
+                    .then( text => console.log(text) )
+                    .catch( error => console.log('There was an error: ', error))
+            </code>
+        </pre>
+
+        <p>File Responses:
+            <pre>
+                the blob(): read a file of raw data, and returns a blob object.
+                <code>
+                    fetch(url)
+                        .then( response => response.blob() ); // transforms the data into a blob object
+                        .then( blob => console.log(blob.type) ) // output the type of the file
+                        .catch( error => console.log('There was an error: ',error))
+                </code>
+            </pre>
+        </p>
+
+        <p> JSON Responses: the most common data in the web.
+            <pre>
+                fetch(url)
+                    .then( response => response.json() ); // transforms the JSON data into a JavaScript object
+                    .then( data => console.log(Object.entries(data)) )
+                    .catch( error => console.log('There was an error: ', error))
+            </pre>
+
+        </p>
+
+        <h3>Creating Response Objects</h3>
+        <pre>
+            const response = new Response( 'Hello!', {
+                ok: true,
+                status: 200,
+                statusText: 'OK',
+                type: 'cors',
+                url: '/api'
+            });
+            // useful for creating an API that needs to send a response
+        </pre>
+
+        <h3>Request Interface</h3>
+        <p>Request() constructor to speficy your own request.
+            <ul>
+                <li>url: url of the requested ressource, (the only property required)</li>
+                <li>method: GET, POST, PUT,... GET by default</li>
+                <li>headers: headers object</li>
+                <li>mode: cors, not cors, enabled by default</li>
+                <li>cache: specify how the request will use the browser's cache</li>
+                <li>credentials: cookies allowed or not, with the request</li>
+                <li>redirect: specify if the response returns a redirect. Three choices:
+                    "follow" (accept the redirect), "error" (reject), "manual" (user will click a link to redirect)
+                </li>
+            </ul>
+        </p>
+        <pre>
+            const request = new Request('https://example.com/data', {
+                method: 'GET',
+                mode: 'cors',
+                redirect: 'follow',
+                cache: 'no-cache'
+                //url: first argument, second: object from the other properties
+            });
+            fetch(request) // the request can be fetched based on the object
+                .then( // do something with the response )
+                .catch( // handle any errors)
+
+            fetch('https://example.com/data', {
+                method: 'GET',
+                mode: 'cors',
+                redirect: 'follow',
+                cache: 'no-cache'
+                })
+                .then( // do something with the response )
+                .catch( // handle any errors)
+        </pre>
+
+        <h3>Headers interface</h3>
+        <p>Containing other information about a request or response: 
+            file-type, resource, cookie information, authentication information and last modified.
+        </p>
+        <pre>
+            const headers = new Headers({ // a constructor function
+                'Content-Type': 'text/plain',
+                'Accept-Charset' : 'utf-8', 
+                'Accept-Encoding':'gzip,deflate'
+            })
+            headers.has('Content-Type'); // check if the Content-Type if provided in the argument
+            headers.get('Content-Type'); // get the value
+            headers.set('Content-Type', 'application/json'); // set the value
+            headers.append('Accept-Encoding','gzip,deflate'); // add a new header
+            headers.delete('Accept-Encoding') // delete a value
+        </pre>
+    </main>
+</body>
+</html>
