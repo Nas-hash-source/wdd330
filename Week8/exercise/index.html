@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <p>Hover on dukes:</p>
+        <h1>Put your <span>dukes</span> up, sire</h1>
+    </header>
+    <main>
+        <h2>Canvas</h2>
+        <canvas id="myCanvas" class="myCanvas" width="500" height="600">
+            Sorry! Your browser doesn’t support Canvas.
+        </canvas>
+        <button name="saveButton" id="saveButton">Save Drawing</button>
+        <h2>SVG</h2>
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 400 400" style="border:1px black dashed">
+            <desc>Drawing a rectangle</desc>
+            <rect x="10" y="10" width="100" height="100"
+            fill="blue" stroke="red" stroke-width="3" />
+        </svg>           
+    </main>
+    <script src="main.js"></script>
+</body>
+</html>

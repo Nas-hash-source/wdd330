@@ -1,0 +1,22 @@
+h1 span {
+    font-size: 30px;
+    color: #999999;
+    display: inline-block;
+    transition: transform 0.2s ease-out 50ms;  
+}
+
+h1 span:hover {
+    color: #484848;
+    transform: rotate(90deg) translate(400px, 100px) scale(2);
+}
+
+canvas {
+    border: 1px black dashed;
+}
+
+button {
+    border-radius: 5px;
+    width: 100px;
+    background-color: blue;
+    color: white;
+}

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 8 Notes</title>
+</head>
+<body>
+    <header>
+        <h1>Week 8 Notes</h1>
+    </header>
+    <main>
+        <h2>Chapter 8: CSS3 Transforms and Transitions</h2>
+        <h3>Exercise:</h3>
+        <p><a href="./exercise/">exercise from the book</a></p>
+        <h3>Question:</h3>
+        <p style="color:red">In the exercise I have done, I retrieve the dataURL of the canvas. The savebutton allows to open that dataURL to another
+            window. However, I got this error which I don't know how to handle: "Not allowed to navigate top frame to data URL".
+        </p>
+        <h3>Transforms</h3>
+        <p>It will enable movement such as skewing, rotation, translation and scaling.</p>
+        <ul>
+            <li>Translation:  works only on a block display.
+                <p>movement through the right, left, bottom and top.</p>
+            <pre>
+                -webkit-transform: translate(45px,-45px); /* iOS8, Android 4.4.3, BB10 */
+                -ms-transform: translate(45px,-45px); /* IE9 only */
+                transform: translate(45px,-45px); // 45px from the left, -45px to the top
+                transform: translateX(45px); // only x
+                transform: translateY(-30px); // only y
+            </pre>
+            </li>
+
+            <li>Scaling:
+                <p>scales an element horizontally and/or vertically.</p>
+            <pre>
+                transform: scale(1.5, 0.25);
+                transform: scale(2); // if one value is provided,
+                // it will be used for both x and y
+                // scale(2) double the size of the object
+            </pre>
+            </li>
+
+            <li>Rotation:
+                <p>rotate the thing in a x deg</p>
+            <pre>
+                transform: rotate(90deg);
+            </pre>
+            </li>
+            
+
+            <li>Skew:
+                <p>skew along the x axis and y axes</p>
+            <pre>
+                transform: skew(15deg, 4deg);
+                transform: skewX(15deg) skewY(4deg);
+            </pre>
+            </li>
+            
+            <li>Transform-origin:
+                <p>By default, the transform origin is from the center by default.</p>
+            <pre>
+                transform-origin: 0 0; // (y, x)
+            </pre>
+            </li>
+        </ul>
+
+        <h3>Transitions:</h3>
+        <p>It allows the changing over time. Here are the steps to create a simple transition: <br>
+        <ul>
+            <li>declare the original state</li>
+            <li>declare the final state</li>
+            <li>include the transition functions in the original state</li>
+        </ul>
+        </p>
+        <ul>
+            <li>transition-property:
+            <pre>
+              .ad-ad2 h1 span {
+                  -webkit-transition-property: -webkit-transform; // support older browsers
+                  transition-property: transform;
+                }  // seperated the property you want to transition with comma
+            </pre>
+            </li>
+            <li>transition-duration:
+                <code>transition-duration: 0.2s; //200ms</code>
+                200 ms is considered as the optimum time, however, making slower will make 
+                the website seem slow.
+            </li>
+            <li>transition-timing-function:</li>
+            <p>It adds details to the animation: either starting off fast and ending slower, 
+                or starting slow and ending faster or some other variations.</p>
+            <pre>
+                transition-timing-function: ease; // slow start, fast end
+                // ease-in-out, same as ease but a little bit faster in the start
+                // linear, constant speed
+                // ease-in, slow to start - gains speed - stops abruptly
+                // ease-out, full speed - slows progressively
+                // precise it with the cubic of cubic-bezier(0, 0, 1, 1)
+            </pre>
+            <li>transition-delay property:
+            <pre>
+                -webkit-transition-delay: 50ms;
+                transition-delay: 50ms; // delay the transition
+            </pre>
+            </li>
+            <li>transition shorthand property:
+            <pre>
+                <code>
+                    transition: transform 0.2s ease-out 50ms;
+                    transition: transform 0.2s ease-out 50ms, color 0.1s linear 50ms;
+                    transition: all 0.2s ease-out 50ms; // all property
+                </code>
+            </pre>
+            </li>
+        </ul>
+
+        <h3>Animations</h3>
+        <p>Unlike transitions, controls at each state the animations via keyframes</p>
+        <pre>
+            // customized a named animation
+            @-webkit-keyframes myAnimation {
+                /* put animation keyframes here */
+               }
+            @keyframes myAnimation {
+                /* put animation keyframes here */
+               }
+            @keyframes moveRight {
+                from { // 0%
+                  transform: translateX(-50%);
+                }
+                to { // 100%
+                  transform: translateX(50%);
+                }
+            }
+            @keyframes appearDisappear {
+                0%, 100% { // selector of percentage,
+                    // it means that the start and the end will be invisible
+                  opacity: 0;
+                }
+                20%, 80% { // here, it will be visible
+                    opacity: 1;
+                }
+            }
+            @keyframes bgMove {
+                100% {
+                  background-position: 120% 0;
+                }
+            }
+        </pre>
+        <h3>Animation Properties:</h3>
+        <ul>
+            <li>animation-name: name; attach the keyframe name.</li>
+            <li>animation-duration: length of the time from 0% to 100%.</li>
+            <li>animation-timing-function: like the transition property one.</li>
+            <li>animation-iteration-count:
+<pre>
+    <code>animation-iteration-count: infinite;</code>
+    // number of the repetion of the animation
+</pre> 
+            </li>
+            <li>animation-direction: set the direction of the iteration
+<pre>
+<code>
+animation-direction: reverse; // 100% to 0%
+animation-duration: alternate; // alternate the nomal and reverse starting from 0% to 100% 
+animation-duration: alternate-reverse; // alternate the direction starting from 100% to 0%
+</code>
+</pre>
+            </li>
+            <li>animation-delay: delay before the animation</li>
+            <li>animation-fill-mode:
+            <p>it indicates what happens before and after the animation.
+            <pre>
+animation-fill-mode: none; // normally as expected
+animation-fill-mode: backwards; // the state will change directly to the first modification
+// tonga dia zay fiovana volohany eo no miseho voalohany
+animation-fill-mode: forwards; // the final change will be set to the element
+animation-fill-mode: both; // backwards, then forwards
+</pre>
+            </p>
+            </li>
+            <li>animation-play-state: running or paused</li>
+            <li>shorthand property:
+                <code>
+                    animation: 300ms ease-in 1 alternate 5s backwards appearDisappear running;
+                    // note that when it's default, you can omit the property.
+                </code>
+            </li>
+        </ul>
+
+        <h2>Chapter 12: Canvas, SVG, and Drag and Drop</h2>
+        
+        <h3>Canvas</h3>
+        <p>Allows to draw anything without downloading images.</p>
+        <p>Creating a canvas element: <br>
+ <pre>
+     <code>
+        &lt;canvas id="myCanvas" class="myCanvas" width="200" height="200"&gt;
+            Sorry! Your browser doesn’t support Canvas.
+        &lt;/canvas&gt; //specify the width and height in the element, instead of via css.
+        // cover this element with border in css in order to be visible.
+     </code>
+ </pre>
+    the drawing will be handled with the canvas API through JavaScript.
+ <pre>
+var canvas = document.getElementById("myCanvas");
+// the context will be the area to be drawn
+var context = canvas.getContext("2d");
+// set the color of the strokeStyle and fillStyle
+context.strokeStyle = "red";
+context.fillStyle = "rgba(0, 0, 255, 0.5)";
+// fillRect(x1, y1, x2, y2)
+context.fillRect(10, 10, 100, 100);
+context.strokeRect(10, 10, 100, 100);       
+ </pre>
+</p>
+
+    <h3>Variations on fillStyle</h3>
+    <p><a href="./exercise/main.js">focus on the exercise and read the comments.</a></p>
+    
+    <h3>Drawing Other Shapes by Creating Paths</h3>
+    <ul>
+        <li>begin a path</li>
+        <li>create the shape, here is a circle, we are using the arc method.</li>
+        <li>close the path</li>
+        <li>add strokeStyle,fillStyle and lineWidth</li>
+        <li> then fill and stroke the context</li>
+    </ul>
+
+    <h3>SVG</h3>
+    <p>Scalable Vector Image</p>
+<pre>
+    // Drawing in SVG
+    &lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">&gt;
+        &lt;circle cx="50" cy="50" r="25" fill="red"/&gt;
+        // viewBox: starting location , width, height
+        // cx, cy, the center of the circle
+        // r : radius
+    &lt;/svg&gt;
+</pre>
+    <p>Use tools for creating complex SVG</p>
+
+    <h3>Drag and Drop</h3>
+    <p>Make an image draggable, set its attribute to true</p>
+    <p>Set an event to the image, with "dragstart" handler</p>
+<pre>
+    mouse.addEventListener("dragstart", function (event) {
+        event.dataTransfer.setData("text/plain", this.id);
+    }); // then the dataTransfer set the mime type, and the id of the draggable element
+    
+
+    // set the dragover event to the location we are going to drop
+    var cat = document.getElementById("cat");
+    cat.addEventListener("dragover", function(event) {
+        event.preventDefault(); // prevent the default action
+    });
+
+    // now an event when it is dropped
+    cat.addEventListener("drop", function(event) {
+        var mouseID = event.originalEvent.dataTransfer.getData("text/plain");
+    } // then get the data we have set.
+</pre>
+</body>
+</html>
