@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 9 Notes</title>
+</head>
+<body>
+    <header>
+        <h1>Week 9 Notes</h1>
+    </header>
+    <main>
+        <h2>Quizz to Ninja</h2>
+        <a href="exercice/">Exercice</a>
+        <h2>Chapter 9: The Window Object</h2>
+        <h3>Browser Object Model</h3>
+        <p>It contains information about the browser and computer screen</p>
+        <h3>Going Global</h3>
+        <p>Global variables can be created without using var, let or const.</p>
+        <p>parseInt(), isNaN() and some functions are all window object.</p>
+
+        <h3>Dialogs</h3>
+        <p>alert(), confirm() and prompt() are not part of ECMScript standard.</p>
+        <pre>
+            <code>
+                window.alert('Hello'); //pause the execution and display a message in a display box
+                window.confirm(); // stop the execution, if ok: return true, if cancel: return false
+                window.prompt(); // allows the userrrrrrrrrrr to enter text, return as a string
+            </code>
+        </pre>
+        <h3>Browser information:</h3>
+        <pre>
+            Some property of the window object
+            <code>
+                window.navigator.userAgent; // return the browser and os information
+                //it can be modified though, and becoming deprecated
+                window.location; // the URL location of the page
+                window.location.href; // the full URL of the page, can be set to another url
+                window.location.hostname; // the domain
+                window.location.host; // domain and the port number
+                window.location.protocol; //protocol of the url
+                window.location.port; // port the url
+                window.location.pathname; // pathname
+                window.location.search // returns a string that starts with a ? followed by the query string parameter
+            </code>
+        </pre>
+        <pre>
+            Some methods of the window.location object
+            <code>
+                window.location.reload() // if the parameter is true,
+                // it will force the browser to reload
+                window.location.assign('https://www.sitepoint.com/') 
+            </code>
+        </pre>
+        <h3>Browser History:</h3>
+        <pre>
+            <code>
+                window.history.go(1); // goes forward 1 page or we can use window.history.forward()
+                window.history.go(0); // reloads the current page
+                window.history.go(-1); // goes back 1 page or we can use window.history.back()
+            </code>
+        </pre>
+
+        <h3>Controlling Window</h3>
+        <pre>
+            <code>
+                const popup = window.open('https://sitepoint.com',
+                'SitePoint', 'width=400, height=400, resizable=yes');
+                //first parameter: URL, second parameter: name of the window, third parameter: attributes
+                popup.close(); // close the window
+                window.moveTo(x, y) // move the position of the window
+                window.resizeTo(width, height); // resize the window 
+            </code>
+        </pre>
+        <p>Can be used to popup ad and annoying stuff but there are alternative ways to avoid that.</p>
+        
+        <h3>Screen Information:</h3>
+        <pre>
+            <code>
+                window.screen.height; // the height of the screen in px
+                window.screen.width; // he width of the screeen in px
+                window.screen.availWidth; // width screen excluding any OS menus
+                window.screen.availHeight; // heigh screen excluding any OS menus
+                window.screen.colorDepth; // access the color bit depth
+            </code>
+        </pre>
+
+        <h3>The Document Object</h3>
+        <pre>
+            <code>
+                document.write(); //writes a string of text to the page.
+                //it will completely replace the current document:
+            </code>
+        </pre>
+
+        <h3>Cookies</h3>
+        <p>Text file that contains a list of name/value pairs seperated by semicolons</p>
+        <p>The EU directive recommended to ask for permission before setting cookies</p>
+        <pre>
+            <code>
+                document.cookie = 'name=Superman'; // add cookie without overwriting
+
+            </code>
+        </pre>
+        <p>By default, cookies are deleted when the session is finished, but you can add expiry dates</p>
+        <pre>
+            <code>
+                const expiryDate = new Date();
+                const tomorrow = expiryDate.getTime() + 1000 * 60 * 60 * 24;
+                expiryDate.setTime(tomorrow);
+                document.cookie = `name=Batman; expires=${
+                expiryDate.toUTCString()}`; // add an expiry date
+            </code>
+        </pre>
+        <p>By default, it's only read inside the same directory and domain as the file was set.</p>
+        <pre>
+            <code>
+                document.cookie = 'name=Batman; path=/'; //any page in the root directory can read the cookie;
+                document.cookie = 'name=B
+                atman; domain=sitepoint.com'; // will allow subdomains too to read the cookie;
+            </code>
+        </pre>
+
+        <h3>Secure cookies</h3>
+        <code>document.cookie = 'name=Batman; secure' // it's only transmitted over a secure HTTPS network</code>
+        <p>Deleting a cookie can be done by setting an expiration in the past.</p>
+        <p>Many developers use Cookies.js or jsCookie for dealing with cookies due to the JavaScript's cookie basic handling.</p>
+
+
+        <h3>Timing Functions</h3>
+        <p><code>window.setTimeout()</code> has a callback function as a first parameter and
+        a number of milliseconds as its second parameter.</p>
+        <p><code>window.clearTimeout()</code> prevents it to happen.</p>
+        <pre>
+            <code>
+                window.setInterval() //same as the window.setTimeout() but it repeats the action depending on the second parameter
+                window.clearInterval(summon) // clear the interval
+            </code>
+        </pre>
+
+    <h2>Chapter 14: HTML5 APIs</h2>
+    <h3>The data-Attribute</h3>
+    <p>Customized attribute from the developer, but it should start with data-</p>
+    <p>It can be accessed through the dataset object of the element.
+        example: <code>document.getElementById('hero').dataset.powers</code>
+    </p>
+
+    <h3>HTML5 Web Storage</h3>
+    <pre>
+        <code>
+            localStorage.setItem('name', 'Walter White'); // set localStorage
+            localStorage.getItem('name'); // get localStorage
+            localStorage.name = 'Heisenberg'; // set localStorage as well
+            localStorage.removeItem('name'); // remove Item 
+            localStorage.clear(); // clear the localStorage
+        </code>
+    </pre>
+    <p> localStorage occurs when the storage is fired only for the same domain, 
+    the event object will have key, newValue, oldValue, storageArea.
+    </p>
+
+    <h3>Geolocation</h3>
+    <p>
+        <pre>
+            <code>
+                navigator.geolocation.getCurrentPosition(youAreHere); // get the location of the user
+                //youAreHere() is a callback that have the position event as a parameter
+                function youAreHere(position) {
+                    console.log(`Latitude: ${position.coords.latitude},
+                    Longitude: ${position.coords.longitude}`);
+                }
+                position.speed // ground speed in meters per second
+                position.altitude // estimate of the device's altitude
+                position.heading // where the device is moving: angles from the North
+                position.timestamp // return the time that the position information was recorded.
+                position.accuracy // returns the accuracy of the lattitude and longitude in meters
+                position.altitudeAccuracy // the accuracy of the altitude property in meters
+            </code>
+        </pre>
+    </p>
+
+    <h3>Web Workers</h3>
+    <p>It allows to run processes in the background, meaning long script won't block the other features to work.</p>
+    <pre>
+        const worker = new Worker('task.js'); // takes the name of another JavaScript file as argument
+        // not that the chrome browser won't let you run workers from local files,
+        // use the --allow-file-access-from-files flag to run it for development,
+        // the keyword self refer to the worker in the task.js file
+        worker.postMessage('Hello'); send message to the worker;
+        self.postMessage('Hi'); send message to the main
+        worker.addEventListener('message', (event) => {
+            console.log(event.data);
+        }, false); // listen to the message event
+        worker.terminate(); terminate the task
+        self.close(); terminate the task
+    </pre> 
+
+    <h3>Shared Web Workers and Service Workers</h3>
+    <p>Shared Web Workes will share web workers with the other scripts in the same domain.</p>
+    <p>Service Workers can intercept network requests. And offer other computation script if the network is offline.</p>
+
+    <h3>Websockets</h3>
+    <p>a protocol that allows instant request response communication, it is useful for chat application.</p>
+    </main>
+
+</body>
+</html>

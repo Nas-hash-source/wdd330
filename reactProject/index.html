@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+
+        main {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        input, label {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <main>
+        <section>
+            <button>Sign in</button>
+            <button>Sign up</button>
+        </section>
+    
+        <!-- sign in form -->
+        <form action="">
+            <label for="signin-email">Email</label> 
+            <input type="email" name="signin-email" id="signin-email">
+    
+            <label for="signin-pwd">Password</label>
+            <input type="password" name="signin-pwd" id="signin-pwd">
+    
+            <input type="checkbox" name="signin-cb" id="signin-cb">
+            <label for="signin-cb">Accept the terms and the policies</label>
+        </form>
+    
+        <!-- sign up form -->
+        <form action="">
+            <label for="signup-firstname">First Name</label> 
+            <input type="text" name="signup-firstname" id="signup-firstname">
+    
+            <label for="signup-lastname">Last Name</label> 
+            <input type="text" name="signup-lastname" id="signup-lastname">
+    
+            <label for="signup-email">Email</label>
+            <input type="email" name="signup-email" id="signup-email">
+    
+            <label for="signup-pwd">Password</label>
+            <input type="password" name="signup-pwd" id="signup-pwd">
+    
+            <label for="signup-dob">Date of birth</label>
+            <input type="date" name="signup-dob" id="signup-dob">
+    
+            <input type="radio" name="signup-gender" id="signup-gender">
+            <label for="signup-gender">Male</label>
+    
+            <input type="radio" name="signup-gender" id="signup-gender">
+            <label for="signup-gender">Female</label>
+        </form>
+    </main>
+    
+
+</body>
+</html>
