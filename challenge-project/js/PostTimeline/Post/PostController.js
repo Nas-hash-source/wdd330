@@ -111,7 +111,6 @@ export default class PostController {
                 this.tag.tagModel.getTagListByPost.bind(this)
                 , input.value
             );
-
             if (postListBySearch && postListBySearch.length > 0 ) {
                 this.showPostList(postListBySearch, this.$el.parent);
             } else {

@@ -45,11 +45,11 @@ export default class BookView {
             `);
     }
 
-    createNavigationItem(pageTitle) {
+    createNavigationItem(pageTitle, pageId) {
         const navItemElement = document.createElement("li");
         navItemElement.innerHTML =
             (
-                `<Button class="navigation-item toggledown" id="page-${pageTitle}">
+                `<Button class="navigation-item toggledown" id="page-${pageTitle}-${pageId}">
                     ${pageTitle}
                 </Button>`
             );

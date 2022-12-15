@@ -75,24 +75,26 @@ export default class postModel {
     }
 
     getPostListByKeyword(callback, keyword) {
-        const filteredPost = this.getPostList().filter(post => {
-            const keywordSearch = keyword.toLowerCase();
-            if (post.title.toLowerCase().includes(keywordSearch) || 
-                post.description.toLowerCase().includes(keywordSearch)){
-                return true;
-            }
+        if (this.getPostList()){
+            const filteredPost = this.getPostList().filter(post => {
+                const keywordSearch = keyword.toLowerCase();
+                if (post.title.toLowerCase().includes(keywordSearch) || 
+                    post.description.toLowerCase().includes(keywordSearch)){
+                    return true;
+                }
 
-            const postTagList = callback(post);
-            if(postTagList) {
-                for (let tag of postTagList){
-                    if(tag.toLowerCase().includes(keywordSearch)) {
-                        return true;
-                    }
-                };
-            }
-        });
+                const postTagList = callback(post);
+                if(postTagList) {
+                    for (let tag of postTagList){
+                        if(tag.toLowerCase().includes(keywordSearch)) {
+                            return true;
+                        }
+                    };
+                }
+            });
 
-        return filteredPost;
+            return filteredPost;
+        } else return null;
     }
 
     getOverallTag() {

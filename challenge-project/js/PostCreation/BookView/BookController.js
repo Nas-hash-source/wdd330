@@ -92,9 +92,9 @@ export default class BookController {
             }
             this.showPage(post, book, newPage.editable, newPage.content, newPage.id, newPage.title);
             this.bookModel.addPage(newPage, book);
-            this.appendOneNavItem(newPage.title);
+            this.appendOneNavItem(newPage.title, newPage.id);
             this.addNavigationListListener(post);
-            toggleHighlight($all(".toggledown"), $(`#page-${newPage.title}`));
+            toggleHighlight($all(".toggledown"), $(`#page-${newPage.title}-${newPage.id}`));
         });
     }
 
@@ -149,9 +149,9 @@ export default class BookController {
         });
     }
 
-    appendOneNavItem(title) {
+    appendOneNavItem(title, pageId) {
         $("#navigation-item").appendChild(
-            this.bookView.createNavigationItem(title)
+            this.bookView.createNavigationItem(title, pageId)
         );
     }
 
