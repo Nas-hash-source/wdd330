@@ -19,7 +19,8 @@ class ToDo {
         this.listToDo = this.listToDo.bind(this);
     }
 
-    addToDo() {
+    addToDo(event) {
+        event.preventDefault();
         if (this.newToDo) {
             const today = new Date();
             const newTask = {id: today.toString(), content: this.newToDo, completed: false};

@@ -142,6 +142,7 @@ export default class BookController {
             this.bookModel.addContentInPage(id, textInput, post, title);
             const newBook = this.bookModel.getBook(post);
             this.showNavigation(newBook);
+            this.addNewPageListener(post);
             this.addNavigationListListener(post);
             highlight($(`#page-${title}-${id}`));
             // the editable becomes false
