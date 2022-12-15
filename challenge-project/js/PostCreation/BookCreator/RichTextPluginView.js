@@ -20,7 +20,7 @@ export default
 
         renderMenuList(menuList) {
             return menuList.map(menu => 
-                `<li><button id="${menu}">${menu}</button></li>
+                `<li><button type="button" id="${menu}">${menu}</button></li>
                 `).join("");
         }
 
@@ -29,13 +29,13 @@ export default
                 switch (tool.type) {
                     case "icon":
                         return (`
-                            <button id="${tool.label}" class="${tool.className}">
+                            <button type="button" id="${tool.label}" class="${tool.className}">
                                 <i class="${tool.icon}"></i>
                             </button>
                         `);
                     case "link":
                         return (`
-                            <button id="${tool.label}" class="${tool.className}">
+                            <button type="button" id="${tool.label}" class="${tool.className}">
                                 <i class="${tool.icon}"></i>
                             </button>
                         `);
@@ -66,7 +66,7 @@ export default
                         `);
                     default: 
                         return (`
-                            <button id="${tool.label}" class="${tool.className}">
+                            <button type="button" id="${tool.label}" class="${tool.className}">
                                 ${tool.label}
                             </button>
                         `)

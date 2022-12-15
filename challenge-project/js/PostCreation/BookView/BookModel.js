@@ -27,21 +27,25 @@ export default class BookModel {
         this.key = `book-${post.id}`;
         this.book = Service.getDataByKey(this.key);
         if (!this.book) {
-            Service.saveData(this.key, {
-                id: post.id,
-                title: post.title,
-                pageList: [
-                    {
-                        id: 0,
-                        title: `Page1`,
-                        content: "",
-                        editable: true
-                    }
-                ]
-            });
+            this.initializeBook(post);
             this.book = Service.getDataByKey(this.key);
         }
         return this.book;
+    }
+
+    initializeBook(post) {
+        Service.saveData(this.key, {
+            id: post.id,
+            title: post.title,
+            pageList: [
+                {
+                    id: 0,
+                    title: `Page1`,
+                    content: "",
+                    editable: true
+                }
+            ]
+        });
     }
 
     getPageById(id, book) {

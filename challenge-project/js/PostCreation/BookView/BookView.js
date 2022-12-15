@@ -3,9 +3,9 @@ export default class BookView {
     renderPageEdit(id) {
         return( `
             <div class="page-edit">
-                <Button class="fa fa-edit" id="bc-edit-page" data-page="${id}">
+                <Button type="button" class="fa fa-edit" id="bc-edit-page" data-page="${id}">
                 </Button>
-                <Button class="fa fa-trash" id="bc-delete-page" data-page="${id}">
+                <Button type="button" class="fa fa-trash" id="bc-delete-page" data-page="${id}">
                 </Button>
             </div>`
         );
@@ -20,7 +20,7 @@ export default class BookView {
                         <i class ="dropdown-menu fa fa-angle-down"></i>
                     </li>
                     <li class="navigation-menu toggledown">
-                        <Button class="new-work" id="new-page">
+                        <Button type="button" class="new-work" id="new-page">
                             <span>New Page</span>
                         </Button>
                     </li>
@@ -38,7 +38,7 @@ export default class BookView {
     renderNavigationItem(pageTitle, pageId) {
         return( `
             <li>
-                <Button class="navigation-item navigation-menu toggledown" id="page-${pageTitle}-${pageId}">
+                <Button type="button" class="navigation-item navigation-menu toggledown" id="bc-pageitem-${pageId}">
                     ${pageTitle}
                 </Button>
             </li>
@@ -49,7 +49,7 @@ export default class BookView {
         const navItemElement = document.createElement("li");
         navItemElement.innerHTML =
             (
-                `<Button class="navigation-item toggledown" id="page-${pageTitle}-${pageId}">
+                `<Button type="button" class="navigation-item toggledown" id="bc-pageitem-${pageId}">
                     ${pageTitle}
                 </Button>`
             );

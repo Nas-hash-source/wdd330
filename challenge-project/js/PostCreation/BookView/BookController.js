@@ -63,9 +63,9 @@ export default class BookController {
         // refresh book
         const book = this.bookModel.getBook(post);
         book.pageList.forEach(page => {
-            addEvent("click", $(`#page-${page.title}-${page.id}`), () => {
+            addEvent("click", $(`#bc-pageitem-${page.id}`), () => {
                 this.showPage(post, book, page.editable, page.content, page.id, page.title);
-                toggleHighlight($all(".toggledown"), $(`#page-${page.title}-${page.id}`));
+                toggleHighlight($all(".toggledown"), $(`#bc-pageitem-${page.id}`));
             });
         });
     }
@@ -83,7 +83,8 @@ export default class BookController {
         addEvent("click", this.$el.newPage, () => {
             // refresh book
             const book = this.bookModel.getBook(post);
-            const index = book.pageList.length;
+            const pageList = book.pageList;
+            const index = pageList[pageList.length - 1].id + 1;
             const newPage = {
                 id: index,
                 title: `Page${index+1}`,
@@ -94,7 +95,7 @@ export default class BookController {
             this.bookModel.addPage(newPage, book);
             this.appendOneNavItem(newPage.title, newPage.id);
             this.addNavigationListListener(post);
-            toggleHighlight($all(".toggledown"), $(`#page-${newPage.title}-${newPage.id}`));
+            toggleHighlight($all(".toggledown"), $(`#bc-pageitem-${newPage.id}`));
         });
     }
 
@@ -116,17 +117,22 @@ export default class BookController {
         addEvent("click", $("#bc-delete-page"), (e)=> {
             // id reference of the page in the screen
             const id = Number(e.target.dataset.page);
-            this.bookModel.deletePageById(id, book);   
+            this.bookModel.deletePageById(id, book);
+            if (book.pageList.length === 1){
+                this.bookModel.initializeBook(post);
+            }
             // refresh book;
             const newBook = this.bookModel.getBook(post);
             this.showNavigation(newBook);
+            this.addNewPageListener(post);
             this.addNavigationListListener(post);
-
+ 
             const firstPage = newBook.pageList[0];
-    
+         
             //then show again firstpage
             this.showPage(post, book, firstPage.editable, firstPage.content, firstPage.id, firstPage.title);
             highlight($(".navigation-item"));
+            
         });
     }
 
@@ -144,7 +150,7 @@ export default class BookController {
             this.showNavigation(newBook);
             this.addNewPageListener(post);
             this.addNavigationListListener(post);
-            highlight($(`#page-${title}-${id}`));
+            highlight($(`#bc-pageitem-${id}`));
             // the editable becomes false
             this.showPage(post, book, false, textInput, id, title);
         });

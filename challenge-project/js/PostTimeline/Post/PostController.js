@@ -60,7 +60,13 @@ export default class PostController {
     // show post list while loading
     showPostList(postList, element) {
         
-        if(!postList) return;
+        if(!postList) {
+            this.$el.parent.innerHTML = 
+                `<div class="post-title">
+                    <h2>No Book</h2>
+                </div>`;
+            return;
+        } 
 
         this.postView.renderPostList(postList, element);
 

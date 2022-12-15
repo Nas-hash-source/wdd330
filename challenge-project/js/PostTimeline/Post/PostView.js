@@ -3,7 +3,7 @@ export default class PostView {
         return (
             `<ul id="recentList">
                 <li>
-                    <Button class="new-work" id="new-book">
+                    <Button type="button" class="new-work" id="new-book">
                         <span>New Book</span><i class="plus fa fa-plus"></i>
                     </Button>
                 </li>
@@ -13,9 +13,9 @@ export default class PostView {
 
     renderToggleButton(){
         return (
-            `<button id="backbutton" class="hidden fa fa-arrow-left"></button>
-            <button class="toggle-button-item toggle-button-active" id="myBooks">My Books</button>
-            <button class="toggle-button-item" id="myTags">My Tags</button>`
+            `<button id="backbutton" type="button" class="hidden fa fa-arrow-left"></button>
+            <button class="toggle-button-item type="button" toggle-button-active" id="myBooks">My Books</button>
+            <button class="toggle-button-item" type="button" id="myTags">My Tags</button>`
         );
     }
 
@@ -40,13 +40,15 @@ export default class PostView {
                 </section>
                 <div class="post-button" id="post-button-${post.id}">
                     <button
+                        type="button"
                         class="tag-button"
                         id="tag-${post.id}"
                     >
                         <span> </span>
                         <i class="fa fa-tag"></i>
                     </button>
-                    <button 
+                    <button
+                        type="button" 
                         class="comment-button" 
                         id="comment-${post.id}"
                     >
@@ -67,7 +69,7 @@ export default class PostView {
                 <label for="newDescription">Book Description:</label>
                 <textarea id="newDescription"></textarea>
                 <div class="error hidden" id="submitError">The title or the description should not be empty</div>
-                <button id="post-submit">Submit</button>
+                <button type="submit" id="post-submit">Submit</button>
             </form>
         `);
     }
