@@ -12,17 +12,17 @@
         <h1>Todos</h1>
     </header>
     <main>
-        <ul id="todo-list"></ul>
+        <form id="add-form">
+            <input type="text" name="new-task" id="new-task">
+            <button type="button" id="add-todo">+</button>
+        </form>
         <ul id="todo-option">
             <li><span id="task-left"></span> left</li>
             <li><button id="all">All.</button></li>
             <li><button id="active">Active.</button></li>
             <li><button id="completed">Completed.</button></li>
         </ul>
-        <form id="add-form">
-            <input type="text" name="new-task" id="new-task">
-            <button type="button" id="add-todo">+</button>
-        </form>
+        <ul id="todo-list"></ul>
     </main>
     <script src="js/main.js" type="module"></script>
 </body>

@@ -4,62 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/font-awesome.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Book Creator</title>
+    <script src="./main.js" type="module" defer></script>
 </head>
 <body>
     <header>
-
         <h1>Book Creator</h1>
 
-        <div>
-            <!--Search Input-->
-            <form name=search>
-                <input type="text" name="searchInput" id="">
-            </form>
-
-            <!--Nav-->
-            <nav>
-                <ul id="recentList">
-                    <li>
-                        <Button>
-                            <span>New work</span>
-                            <img src="" alt="">
-                        </Button>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-
+        <!--Search Input-->
+        <form id="search" name=search>
+            <div id="searchInput">
+                <input type="text" class="search" placeholder="Search book..."autocomplete="off">
+                <button class="fa fa-search"></button>
+            </div>
+        </form>
     </header>
+    <nav id="navigation">
+        
+    </nav>
 
     <main>
-        <!--Toggle Button-->
-        <div>
-            <button>My work</button>
-            <button>Bookmark</button>
+        <!--Toggle button-->
+        <div class="toggle-button" id="toggle-button">
         </div>
 
         <!--Post List-->
-        <section>
-            <!--Post-->
-            <article>
-                <div>
-                    <h2>Example title</h2>
-                    <button>Edit</button>
-                </div>
-
-                <section>
-                    <div></div>
-                    <button>Edit</button>
-                </section>
-
-                <div>
-                    <button>Tag</button>
-                    <button>Comment</button>
-                </div>
-            </article>
-
+        <section id="root">
+            
         </section>
     </main>
 </body>
